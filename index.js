@@ -48,6 +48,7 @@ try{
     const category = client.db('partexResell').collection('category');
     const bookingsCollection = client.db('partexResell').collection('booking');
     const usersCollection = client.db('partexResell').collection('users');
+    const productsCollection = client.db('partexResell').collection('products');
 
     app.get('/categoriesOption', async (req, res) => {
         const query = {};
@@ -115,6 +116,20 @@ try{
         res.status(403).send({ accessToken: '' })
     });
 
+            // user find
+            app.get('/users/:email', async (req, res) => {
+                const email = req.params.email;
+                const query = { email }
+                const user = await usersCollection.findOne(query);
+                res.send({ isUser: user?.role !== 'admin' });
+            })
+
+
+
+
+
+
+
        app.get('/users/admin/:email', async (req, res) => {
             const email = req.params.email;
             const query = { email }
@@ -152,11 +167,19 @@ try{
     })
 
 
+    app.get('/products', verifyJWT, async (req, res) => {
+        const query = {};
+        const doctors = await productsCollection.find(query).toArray();
+        res.send(doctors);
+    })
 
 
 
-
-
+    app.post('/products',   async (req, res) => {
+        const doctor = req.body;
+        const result = await productsCollection.insertOne(doctor);
+        res.send(result);
+    });
 
 
 
