@@ -115,7 +115,12 @@ try{
         res.status(403).send({ accessToken: '' })
     });
 
-    
+       app.get('/users/admin/:email', async (req, res) => {
+            const email = req.params.email;
+            const query = { email }
+            const user = await usersCollection.findOne(query);
+            res.send({ isAdmin: user?.role === 'admin' });
+        })
 
     app.post('/users', async (req, res) => {
         const user = req.body;
