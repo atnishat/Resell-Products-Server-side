@@ -124,12 +124,6 @@ try{
                 res.send({ isUser: user?.role !== 'admin' });
             })
 
-
-
-
-
-
-
        app.get('/users/admin/:email', async (req, res) => {
             const email = req.params.email;
             const query = { email }
@@ -175,7 +169,7 @@ try{
 
 
 
-    app.post('/products',   async (req, res) => {
+    app.post('/products', verifyJWT,  async (req, res) => {
         const doctor = req.body;
         const result = await productsCollection.insertOne(doctor);
         res.send(result);
