@@ -84,19 +84,6 @@ try{
 
     app.post('/bookings', async (req, res) => {
         const booking = req.body;
-        // console.log(booking);
-        // const query = {
-        //     appointmentDate: booking.appointmentDate,
-        //     email: booking.email,
-        //     treatment: booking.treatment 
-        // }
-        // const alreadyBooked = await bookingsCollection.find(query).toArray();
-
-        // if (alreadyBooked.length){
-        //     const message = `You already have a booking on ${booking.appointmentDate}`
-        //     return res.send({acknowledged: false, message})
-        // }
-
         const result = await bookingsCollection.insertOne(booking);
         res.send(result);
     })
@@ -183,42 +170,6 @@ try{
         res.send(result);
     })
 
-
-
-
- // app.get('/categoriesOption/:id', async (req, res) => {
-    //     const id = req.params.id;
-    //     const query = {id: id};
-    //     const result = await categoryOption.find(query).toArray();
-    //     res.send(result);
-    // });
-
-    // app.get('/product', async (req, res) => {
-    //     const id = req.params.id;
-    //     const query = {_id: ObjectId(id)}
-    //     const result = await categoryOption.find(query).toArray();
-    //     res.send(result);
-    // });
-
-    //  app.get('/products/:id', async (req, res) => {
-    //     const id = req.params.id;
-    //     // console.log(id);
-    //     const query = {categories_id :id }
-    //     const catOptions = await categoryOption.find(query).toArray();
-    //     res.send(catOptions);
-    //  });
-
-
- 
-
-
-
-     // console.log(id);
-        // const query = {categories_id: id}
- // console.log(query);
-        // const result= await categoryOption.find(query).toArray()
-    // const query = {_id: ObjectId(id)}
-    // const result = await categoryOption.find(query).toArray();
 
 
 }
